@@ -18,22 +18,17 @@ app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 
 debug = DebugToolbarExtension(app)
 
-
 @app.route("/")
 def root():
     """Homepage: redirect to /playlists."""
-
     return redirect("/playlists")
-
 
 ##############################################################################
 # Playlist routes
 
-
 @app.route("/playlists")
 def show_all_playlists():
     """Return a list of playlists."""
-
     playlists = Playlist.query.all()
     return render_template("playlists.html", playlists=playlists)
 
@@ -59,18 +54,13 @@ def add_playlist():
         return redirect(f"/playlists")
     
     return render_template('new_playlist.html', form=form)
-        
-    # ADD THE NECESSARY CODE HERE FOR THIS ROUTE TO WORK
-
 
 ##############################################################################
 # Song routes
 
-
 @app.route("/songs")
 def show_all_songs():
     """Show list of songs."""
-
     songs = Song.query.all()
     return render_template("songs.html", songs=songs)
 
@@ -97,6 +87,7 @@ def add_song():
 def add_song_to_playlist(playlist_id):
     """Add a playlist and redirect to list."""
     form = NewSongForPlaylistForm()
+    
     # Restrict form to songs not already on this playlist
     playlist = Playlist.query.get_or_404(playlist_id)
     curr_on_playlist = [song.id for song in playlist.songs]
@@ -111,6 +102,3 @@ def add_song_to_playlist(playlist_id):
     return render_template("add_song_to_playlist.html",
                              playlist=playlist,
                              form=form)
-    
-    
-
