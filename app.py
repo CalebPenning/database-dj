@@ -55,10 +55,8 @@ def add_playlist():
     form = PlaylistForm()
     
     if form.validate_on_submit():
-        new_pl = Playlist.create_playlist(form)
-        db.session.add(new_pl)
-        db.session.commit()
-        return redirect(f"/playlists/{new_pl.id}")
+        Playlist.create_playlist(form)
+        return redirect(f"/playlists")
     
     return render_template('new_playlist.html', form=form)
         
