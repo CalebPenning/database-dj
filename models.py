@@ -70,7 +70,7 @@ class Song(db.Model):
         db.session.add(new_song)
         try:
             db.session.commit()
-            
+
         except IntegrityError:
             db.session.rollback()
             form.title.errors.append('Must input a title for the song')
@@ -90,8 +90,16 @@ class PlaylistSong(db.Model):
     song_id = db.Column(db.Integer,
                         db.ForeignKey('songs.id'))
     
-        
-    
+    @classmethod
+    def map_song_to_pl(cls, form, playlist_id):
+        song = Song.query.get_or_404(form.song.data)
+        playlist = Playlist.query.get_or_404(playlist_id)
+        playlist.songs.append(song)
+        try:
+            db.session.commit()
+        except IntegrityError:
+            db.session.rollback()
+            form.song.errors.append('Something went wrong, try again.')
 
 
 # DO NOT MODIFY THIS FUNCTION

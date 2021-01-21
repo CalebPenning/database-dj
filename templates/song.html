@@ -7,8 +7,23 @@
   <p class="lead">&ndash; {{ song.artist }}</p>
 </div>
 
-<ul>
-  DISPLAY ALL OF THE PLAYLISTS THAT THIS SONG IS A PART OF
+{% if song.playlists %}
+<div class="container">
+<h2 class="text-primary display-5">This song can be found in these playlists: </h2>
+<ul class="list-group">
+    {% for playlist in song.playlists %}
+    <li class="list-group-item"><a href="/playlists/{{playlist.id}}">{{ playlist.name }}</a></li>
+    {% endfor %}
 </ul>
+</div>
+{% else %}
+<div class="container">
+<h2 class="display-5">This song isn't on any playlists yet.</h2>
+<ul class="list-group">
+    <li class="list-group-item"><a href="/playlists/new" class="btn btn-primary">Create a New Playlist</a></li>
+    <li class="list-group-item"><a href="/songs/new" class="btn btn-primary">Add a Song to the Library</a></li>
+</ul>
+</div>
+{% endif %}
 
 {% endblock %}
