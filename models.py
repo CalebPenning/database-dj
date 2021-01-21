@@ -58,8 +58,8 @@ class Song(db.Model):
                                 secondary='playlists_songs',
                                 backref='songs')
     
-    belongs_to = db.relationship('PlaylistSong',
-                                 backref='song')
+    # belongs_to = db.relationship('PlaylistSong',
+    #                              backref='song')
     
     @classmethod
     def create_song(cls, form):
