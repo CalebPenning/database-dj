@@ -18,7 +18,7 @@ Windows users can do the following in Powershell:
 6. `flask run`
 
 OPTIONAL:
-`(While in virtualenv) python -m seed.py`
+`(While in virtualenv) python seed.py`
 
 ### To run in development mode
 #### Windows:
